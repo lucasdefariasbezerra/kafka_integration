@@ -1,8 +1,9 @@
 package com.joaorock.lineup.bands.config;
 
-import com.joaorock.lineup.bands.model.Band;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -17,12 +18,19 @@ import java.util.Map;
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
+
+    @Value("${bootstrap-server}")
+    private String bootstrapServer;
+
+    @Value("${consumer-group}")
+    private String consumerGroup;
+
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
 
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroup);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 

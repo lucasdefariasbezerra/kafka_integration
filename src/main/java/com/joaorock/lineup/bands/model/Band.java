@@ -2,6 +2,7 @@ package com.joaorock.lineup.bands.model;
 
 public class Band {
 
+    private Integer id;
     private String name;
     private String style;
     private Double value;
@@ -9,10 +10,19 @@ public class Band {
     public Band() {
     }
 
-    public Band(String name, String style, Double value) {
+    public Band(Integer id,String name, String style, Double value) {
+        this.id = id;
         this.name = name;
         this.style = style;
         this.value = value;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

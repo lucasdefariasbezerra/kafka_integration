@@ -14,6 +14,7 @@ public class BandProducer {
     private static final String TOPIC = "bands_topic";
 
     public void publishBand(Band band){
-        kafkaTemplate.send(TOPIC, band);
+
+        kafkaTemplate.send(TOPIC,String.valueOf(band.getId()), band);
     }
 }
