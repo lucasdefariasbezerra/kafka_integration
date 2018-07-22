@@ -18,6 +18,7 @@ public class BandsController {
 
     @PostMapping("/create")
     public String create(@RequestBody final Band band) {
+
         bandProducer.publishBand(band);
         return "Published successfully";
     }
