@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BandProducer {
 
-    @Autowired
+    /*@Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
     private static final String TOPIC = "band_topic";
 
     public void publishBand(Band band){
         kafkaTemplate.send(TOPIC, DataConversion.getJson(band));
-    }
+    }*/
 }
