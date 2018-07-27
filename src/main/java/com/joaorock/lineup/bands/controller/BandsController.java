@@ -1,7 +1,8 @@
 package com.joaorock.lineup.bands.controller;
 
 import com.joaorock.lineup.bands.integration.BandProducer;
-import com.joaorock.lineup.bands.model.Band;
+import com.joaorock.lineup.bands.model.BandDTO;
+import example.avro.Band;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +18,12 @@ public class BandsController {
 
 
     @PostMapping("/create")
-    public String create(@RequestBody final Band band) {
-        //bandProducer.publishBand(band);
+    public String create(@RequestBody final BandDTO band) {
+        Band bandTopic = new Band();
+        bandTopic.setName(band.getName());
+        bandTopic.setStyle(band.getName());
+        bandTopic.setValue(band.getValue());
+        bandProducer.publishBand(bandTopic);
         return "Published successfully";
     }
 }

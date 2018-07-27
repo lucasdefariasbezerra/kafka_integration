@@ -1,7 +1,6 @@
 package com.joaorock.lineup.bands.integration;
 
-import com.joaorock.lineup.bands.model.Band;
-import com.joaorock.lineup.bands.utils.DataConversion;
+import example.avro.Band;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -9,12 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class BandProducer {
 
-    /*@Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    @Autowired
+    private KafkaTemplate<String, Band> kafkaTemplate;
 
-    private static final String TOPIC = "band_topic";
+    private static final String TOPIC = "band-topic";
 
     public void publishBand(Band band){
-        kafkaTemplate.send(TOPIC, DataConversion.getJson(band));
-    }*/
+        kafkaTemplate.send(TOPIC, band);
+    }
 }

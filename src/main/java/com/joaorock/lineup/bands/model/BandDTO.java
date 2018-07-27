@@ -1,15 +1,15 @@
 package com.joaorock.lineup.bands.model;
 
-public class Band {
+public class BandDTO {
 
     private String name;
     private String style;
     private Double value;
 
-    public Band() {
+    public BandDTO() {
     }
 
-    public Band(String name, String style, Double value) {
+    public BandDTO(String name, String style, Double value) {
         this.name = name;
         this.style = style;
         this.value = value;
@@ -41,7 +41,7 @@ public class Band {
 
     @Override
     public String toString() {
-        return "Band{" +
+        return "BandDTO{" +
                 "name='" + name + '\'' +
                 ", style='" + style + '\'' +
                 ", value=" + value +

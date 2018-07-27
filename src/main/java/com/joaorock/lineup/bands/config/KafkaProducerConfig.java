@@ -2,6 +2,7 @@ package com.joaorock.lineup.bands.config;
 
 import com.joaorock.lineup.bands.model.Country;
 import com.joaorock.lineup.bands.serializer.AvroSerializer;
+import example.avro.Band;
 import example.avro.City;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -33,8 +34,19 @@ public class KafkaProducerConfig {
     }
 
     @Bean
+    public ProducerFactory<String, Band> producerFactoryBand() {
+        return new DefaultKafkaProducerFactory<>(producerConfig());
+    }
+
+    @Bean
     public KafkaTemplate<String,City> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
+
+    @Bean
+    public KafkaTemplate<String,Band> kafkaTemplateBand() {
+        return new KafkaTemplate<>(producerFactoryBand());
+    }
+
 
 }

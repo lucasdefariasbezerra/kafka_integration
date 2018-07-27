@@ -1,7 +1,7 @@
 package com.joaorock.lineup.bands.config;
 
-import com.joaorock.lineup.bands.model.Band;
 import com.joaorock.lineup.bands.serializer.AvroDeserializer;
+import example.avro.Band;
 import example.avro.City;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -11,7 +11,6 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 
 import java.util.HashMap;
@@ -31,6 +30,19 @@ public class KafkaConsumerConfig {
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, AvroDeserializer.class);
         return  config;
+    }
+
+    @Bean
+    public ConsumerFactory<String, Band> consumerFactoryBand() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfig(), new StringDeserializer(),
+                new AvroDeserializer<>(Band.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Band> kafkaListenerContainerFactoryBand() {
+        ConcurrentKafkaListenerContainerFactory<String, Band> factory = new ConcurrentKafkaListenerContainerFactory();
+        factory.setConsumerFactory(consumerFactoryBand());
+        return factory;
     }
 
     @Bean

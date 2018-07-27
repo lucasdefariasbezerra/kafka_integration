@@ -9,8 +9,8 @@ public class CityConsumer {
     private static final String TOPIC = "city-topic";
     private static final String GROUP = "group_id";
 
-    @KafkaListener(topics =  TOPIC, group = GROUP)
+    @KafkaListener(topics =  TOPIC, group = GROUP,containerFactory = "kafkaListenerContainerFactory")
     public void consume(City city) {
-        System.out.println("Consumed message: ");
+        System.out.println("Consumed message: "+ city.toString());
     }
 }

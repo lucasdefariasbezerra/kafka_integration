@@ -1,20 +1,22 @@
 package com.joaorock.lineup.bands.integration;
 
-import com.joaorock.lineup.bands.model.Band;
-import com.joaorock.lineup.bands.utils.DataConversion;
+import example.avro.Band;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BandsConsumer {
 
-    /*private static final String TOPIC = "band_topic";
-    private static final String GROUP = "group_id";
+    private static final String TOPIC = "band-topic";
+    private static final String GROUP = "band_group_id";
 
-    @KafkaListener(topics =  TOPIC, group = GROUP)
-    public void consume(String message) {
-        Band band = DataConversion.getObject(message,Band.class);
+    /* when the application has more than
+       1 schema types is necessary to set
+       the containerFactory in order to read the
+       according avro schema */
+    @KafkaListener(topics =  TOPIC, group = GROUP, containerFactory = "kafkaListenerContainerFactoryBand")
+    public void consume(Band band) {
         System.out.println("Consumed message: " + band.toString());
-    }*/
+    }
 
 }
