@@ -1,0 +1,22 @@
+{"namespace": "example.avro",
+  "type": "record",
+  "name": "Country",
+  "fields": [
+    {"name": "id", "type": "int"},
+    {"name": "name", "type": "string"},
+    {"name": "continent", "type": "string"},
+    {"name": "language", "type": "string"},
+    {"name":"cities", "type":{
+        "type": "array",
+        "items":{
+           "type": "record",
+           "name": "City",
+           "fields": [
+              {"name": "id", "type": "int"},
+              {"name": "name", "type": "string"},
+              {"name": "isCapital", "type": "boolean"}
+            ]
+        }
+    }}
+  ]
+}

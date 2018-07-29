@@ -3,6 +3,7 @@ package com.joaorock.lineup.bands.config;
 import com.joaorock.lineup.bands.serializer.AvroDeserializer;
 import example.avro.Band;
 import example.avro.City;
+import example.avro.Country;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -46,15 +47,14 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, City> consumerFactory() {
+    public ConsumerFactory<String, Country> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfig(), new StringDeserializer(),
-                new AvroDeserializer<>(City.class));
+                new AvroDeserializer<>(Country.class));
     }
 
-
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, City> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, City> factory = new ConcurrentKafkaListenerContainerFactory();
+    public ConcurrentKafkaListenerContainerFactory<String, Country> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Country> factory = new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
